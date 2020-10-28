@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mrraxa01.projetoSBI.domain.enums.EstadoPagamento;
 
 @Entity
@@ -24,7 +24,7 @@ public abstract class  Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado;//para que o enum retorne 1 cod ao invés de string, deve-se declarar como Integer. Observar o constr., get e set 
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
