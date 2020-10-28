@@ -13,6 +13,7 @@ import com.mrraxa01.projetoSBI.domain.Cidade;
 import com.mrraxa01.projetoSBI.domain.Cliente;
 import com.mrraxa01.projetoSBI.domain.Endereco;
 import com.mrraxa01.projetoSBI.domain.Estado;
+import com.mrraxa01.projetoSBI.domain.ItemPedido;
 import com.mrraxa01.projetoSBI.domain.Pagamento;
 import com.mrraxa01.projetoSBI.domain.PagamentoComBoleto;
 import com.mrraxa01.projetoSBI.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.mrraxa01.projetoSBI.repositories.CidadeRepository;
 import com.mrraxa01.projetoSBI.repositories.ClienteRepository;
 import com.mrraxa01.projetoSBI.repositories.EnderecoRepository;
 import com.mrraxa01.projetoSBI.repositories.EstadoRepository;
+import com.mrraxa01.projetoSBI.repositories.ItemPedidoRepository;
 import com.mrraxa01.projetoSBI.repositories.PagamentoRepository;
 import com.mrraxa01.projetoSBI.repositories.PedidoRepository;
 import com.mrraxa01.projetoSBI.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class ProjetoSbiApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoSbiApplication.class, args);
@@ -110,6 +114,19 @@ public class ProjetoSbiApplication implements CommandLineRunner {
 	
 	pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 	pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+	
+	ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+	ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+	ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+	ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+	ped2.getItens().addAll(Arrays.asList(ip3));
+	p1.getItens().addAll(Arrays.asList(ip1));
+	p2.getItens().addAll(Arrays.asList(ip3));
+	p3.getItens().addAll(Arrays.asList(ip2));
+	
+	itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+	
+	
 	
 	
 			}
