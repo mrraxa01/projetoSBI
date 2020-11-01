@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.mrraxa01.projetoSBI.DTO.CategoriaDTO;
 import com.mrraxa01.projetoSBI.domain.Categoria;
 import com.mrraxa01.projetoSBI.repositories.CategoriaRepository;
 import com.mrraxa01.projetoSBI.services.exceptions.DataIntegrityException;
@@ -55,6 +56,10 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 		
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 	
 }
