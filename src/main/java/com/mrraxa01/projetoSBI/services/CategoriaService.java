@@ -22,6 +22,7 @@ public class CategoriaService {
 	@Autowired
 	public CategoriaRepository repo;
 	
+	//método implementado, busca o id no BD e caso não exista já lança excessão.
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " +id + ", Tipo: " + Categoria.class.getName()));
@@ -32,8 +33,10 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+
 	public Categoria update(Categoria obj) {
-		find(obj.getId());//método implementado acima, busca o id no BD e caso não exista já lança excessão.
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
 		return repo.save(obj);
 	}
 	
@@ -62,4 +65,8 @@ public class CategoriaService {
 		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 	
+	private void updateData(Categoria newObj, Categoria Obj) {
+		newObj.setNome(Obj.getNome());
+	
+	}
 }
