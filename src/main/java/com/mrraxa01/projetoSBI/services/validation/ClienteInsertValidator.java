@@ -6,12 +6,19 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mrraxa01.projetoSBI.DTO.ClienteNewDTO;
+import com.mrraxa01.projetoSBI.domain.Cliente;
 import com.mrraxa01.projetoSBI.domain.enums.TipoCliente;
+import com.mrraxa01.projetoSBI.repositories.ClienteRepository;
 import com.mrraxa01.projetoSBI.resources.exception.FieldMessage;
 import com.mrraxa01.projetoSBI.services.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+	@Autowired
+	private ClienteRepository repo;
+	
 	@Override
 	public void initialize(ClienteInsert ann) {
 	}
@@ -32,6 +39,11 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			
 		}
 		
+		Cliente aux = repo.findByEmail(objDTO.getEmail());
+		if(aux != null) {
+			
+			list.add(new FieldMessage("email", "EMAIL já cadastrado!"));
+		}
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
