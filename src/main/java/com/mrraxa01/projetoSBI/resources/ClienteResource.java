@@ -1,5 +1,6 @@
 package com.mrraxa01.projetoSBI.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mrraxa01.projetoSBI.DTO.ClienteDTO;
+import com.mrraxa01.projetoSBI.DTO.ClienteNewDTO;
 import com.mrraxa01.projetoSBI.domain.Cliente;
 import com.mrraxa01.projetoSBI.services.ClienteService;
 
@@ -33,9 +36,9 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	/*
+	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDTO){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
 		Cliente obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
 		//esse método abaixo retorna o Id do obj criado 
@@ -43,7 +46,7 @@ public class ClienteResource {
 		return ResponseEntity.created(uri).build();
 		
 	}
-	*/
+	
 	@RequestMapping(value ="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO, @PathVariable Integer id){
 		Cliente obj = service.fromDTO(objDTO);
