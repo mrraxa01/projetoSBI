@@ -1,5 +1,6 @@
 package com.mrraxa01.projetoSBI.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,10 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mrraxa01.projetoSBI.domain.Categoria;
+import com.mrraxa01.projetoSBI.domain.PagamentoComBoleto;
+import com.mrraxa01.projetoSBI.domain.Pedido;
 import com.mrraxa01.projetoSBI.domain.Produto;
+import com.mrraxa01.projetoSBI.domain.enums.EstadoPagamento;
 import com.mrraxa01.projetoSBI.repositories.CategoriaRepository;
 import com.mrraxa01.projetoSBI.repositories.ProdutoRepository;
 import com.mrraxa01.projetoSBI.services.exceptions.ObjectNotFoundException;
@@ -34,4 +38,7 @@ public class ProdutoService {
 		return repo.search(nome, categorias, pageRequest);
 		
 	}
-}
+
+		
+	}
+

@@ -11,13 +11,16 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.mrraxa01.projetoSBI.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)//mapeia as subclasses, se escolher
 //'joined' vai fazer 1 tabela no bd com os valores da outra subclasse como null
 //se escolher 'singletable' será gerada 1 tabela para cada subclasse
-public abstract class  Pagamento implements Serializable {
+
+	@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+	public abstract class  Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 //O id do pgto deve ser o msm do pedido, então o mapeamento será no pedido
 	@Id
