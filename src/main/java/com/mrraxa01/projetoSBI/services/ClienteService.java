@@ -18,9 +18,12 @@ import com.mrraxa01.projetoSBI.DTO.ClienteNewDTO;
 import com.mrraxa01.projetoSBI.domain.Cidade;
 import com.mrraxa01.projetoSBI.domain.Cliente;
 import com.mrraxa01.projetoSBI.domain.Endereco;
+import com.mrraxa01.projetoSBI.domain.enums.Perfil;
 import com.mrraxa01.projetoSBI.domain.enums.TipoCliente;
 import com.mrraxa01.projetoSBI.repositories.ClienteRepository;
 import com.mrraxa01.projetoSBI.repositories.EnderecoRepository;
+import com.mrraxa01.projetoSBI.security.UserSS;
+import com.mrraxa01.projetoSBI.services.exceptions.AuthorizationException;
 import com.mrraxa01.projetoSBI.services.exceptions.DataIntegrityException;
 import com.mrraxa01.projetoSBI.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +40,10 @@ public class ClienteService {
 	public BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+				throw new AuthorizationException("Acesso Negado");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " +id + ", Tipo: " + Cliente.class.getName()));
 	}
