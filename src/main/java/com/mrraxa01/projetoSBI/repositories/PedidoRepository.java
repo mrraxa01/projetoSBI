@@ -14,4 +14,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
 	@Transactional(readOnly=true)
 	Page<Pedido> findByCliente(Cliente cliente, Pageable pageRequest);
+	/*
+	@Transactional(readOnly=true)
+	Page<Pedido> findByCliente(Cliente cliente, Pageable pageRequest);
+*/
 }
