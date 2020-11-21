@@ -132,13 +132,19 @@ private static final String[] PUBLIC_MATCHERS = {
 			"/categorias/**"
 			
 	};
+
+	/*
 	//vai permitir o cadastro de cliente não logado
 	private static final String[] PUBLIC_MATCHERS_POST = {
 			"/clientes/**",
-			
-			
+			"/auth/forgot/**"
+	};*/
+	private static final String[] PUBLIC_MATCHERS_POST = {
+			"/clientes/**",
+			"/auth/forgot/**"
 	};
 
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		//Esse if só se aplica ao perfil de teste
@@ -149,7 +155,7 @@ private static final String[] PUBLIC_MATCHERS = {
 		//o metodo csrf = disable desabilita seguranca. deve ser habilitado qdo se salva senha em sessões
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_POST).permitAll()
+		.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
 		.antMatchers(PUBLIC_MATCHERS).permitAll()
 		.anyRequest().authenticated();
