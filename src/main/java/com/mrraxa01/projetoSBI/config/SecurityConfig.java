@@ -129,7 +129,8 @@ private static final String[] PUBLIC_MATCHERS = {
 	//os endpoints só terão acesso para leitura
 	private static final String[] PUBLIC_MATCHERS_GET = {
 			"/produtos/**",
-			"/categorias/**"
+			"/categorias/**",
+			"/estados/**"
 			
 	};
 
