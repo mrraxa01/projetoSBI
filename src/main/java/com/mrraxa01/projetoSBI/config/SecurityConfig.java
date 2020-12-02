@@ -141,11 +141,8 @@ private static final String[] PUBLIC_MATCHERS = {
 	};*/
 	private static final String[] PUBLIC_MATCHERS_POST = {
 			"/clientes/**",
-			"/clientes/picture",
 			"/auth/forgot/**"				
-			/*"/clientes/**",
-			"/clientes/picture",
-			"/auth/forgot/**"*/
+
 	};
 
 	
