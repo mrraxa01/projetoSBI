@@ -1,5 +1,6 @@
 package com.mrraxa01.projetoSBI.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mrraxa01.projetoSBI.DTO.ClienteDTO;
 import com.mrraxa01.projetoSBI.DTO.ClienteNewDTO;
@@ -38,6 +40,9 @@ public class ClienteService {
 
 	@Autowired
 	public BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
@@ -106,5 +111,12 @@ public class ClienteService {
 	private void updateData(Cliente newObj, Cliente Obj) {
 		newObj.setNome(Obj.getNome());
 		newObj.setEmail(Obj.getEmail());
+	}
+	/*
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
+	}*/
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 }
