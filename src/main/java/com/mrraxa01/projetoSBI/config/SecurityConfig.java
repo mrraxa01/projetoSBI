@@ -175,10 +175,21 @@ private static final String[] PUBLIC_MATCHERS = {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
+	//Esse CORS tb funciona nessa versão do Spring, substitui pelo debaixo só para teste
+	/*
 	@Bean	
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		return source;
+	}
+	*/
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {		
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
 	//Bean para encryptar a senha do cliente
