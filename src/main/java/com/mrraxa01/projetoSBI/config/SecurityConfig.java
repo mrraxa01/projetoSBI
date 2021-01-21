@@ -176,9 +176,10 @@ private static final String[] PUBLIC_MATCHERS = {
 	}
 	
 	//Esse CORS tb funciona nessa versão do Spring, substitui pelo debaixo só para teste
-	/*
-	@Bean	
+	
+	/*@Bean	
 	CorsConfigurationSource corsConfigurationSource() {
+		
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
